@@ -1,0 +1,8 @@
+function fun (){ 
+         const console = {
+                log: print,
+                warn: print,
+                error: print
+        };
+console.log(1);console.log(1);
+} 
