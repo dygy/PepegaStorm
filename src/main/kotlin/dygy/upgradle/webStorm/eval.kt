@@ -26,6 +26,7 @@ internal object JSeval  {
             println("Captured output: $sw")
             sw.toString()
         } catch (e: ScriptException) {
+
             var thisNum = regex.toRegex(RegexOption.MULTILINE).find(e.toString())?.groups?.get(1)?.value.toString().toInt()
             thisNum -= 6
             e.toString().replace("javax.script.ScriptException:","").replace("in <eval>","").replace(regex.toRegex(),("at line number $thisNum"))
