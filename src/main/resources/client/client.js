@@ -5,7 +5,5 @@ function fun (){
                 error: print
         };
 
-
-
-console.log(fg)
+        
  } 

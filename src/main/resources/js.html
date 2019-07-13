@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Write Panel</title>
+    <title>Write Panel for JS</title>
     <link href="writePannel.css" rel="stylesheet">
 </head>
 <body>
@@ -13,7 +13,11 @@
         </button>
     </div>
 </div>
-<div id="lefbar"></div>
+<div id="lefbar">
+    <span> <a onclick="navigateTo('/html')"> client.html </a> </span>
+    <span> <a onclick="navigateTo('/js')"> client.js </a></span>
+    <span> <a onclick="navigateTo('/css')"> client.css </a></span>
+</div>
 <div  id="textArea">
     <div id="leftBorder">
         <textarea id="code">
@@ -26,7 +30,6 @@
         <div id="terminal"> </div>
     </div>
 </div>
-
-<script src="index.js"></script>
+<script src="js.js"></script>
 </body>
 </html>

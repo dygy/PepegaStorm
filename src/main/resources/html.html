@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Write Panel for HTML</title>
+    <link href="writePannel.css" rel="stylesheet">
+</head>
+<body>
+<div id="navbar">
+    <div id="config">
+        <button id="run" onclick="toCompile()" >
+            <div id="triangle-right"> </div>
+        </button>
+    </div>
+</div>
+<div id="lefbar">
+    <span> <a onclick="navigateTo('/html')"> client.html </a> </span>
+    <span> <a onclick="navigateTo('/js')"> client.js </a></span>
+    <span> <a onclick="navigateTo('/css')"> client.css </a></span>
+</div>
+<div  id="textArea">
+    <div id="leftBorder">
+        <textarea id="code">
+
+        </textarea>
+    </div>
+</div>
+<div id="footer">
+    <div id="chosePanel">
+        <div id="terminal"> </div>
+    </div>
+</div>
+
+<script src="html.js"></script>
+</body>
+</html>
