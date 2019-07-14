@@ -4,6 +4,6 @@ function fun (){
                 warn: print,
                 error: print
         };
-
+alert("HeLLO WORLD")
         
  } 

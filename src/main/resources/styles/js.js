@@ -1,7 +1,6 @@
-const host = location.origin.replace(/^http/, 'ws');
+const host = location.href.replace(/^http/, 'ws');
 const ws = new WebSocket(host);
 let output = document.querySelector('#terminal');
-const input = document.querySelector('#code');
 ws.onopen = () =>{
     console.log('websocket is connected ...');
     // sending a send event to websocket server
@@ -20,7 +19,7 @@ let toCompile =() =>{
     ws.send('JS'+input.value);
 };
 let navigateTo=(href)=>{
-    ws.send('JS'+input.value);
+    ws.send('NoJS'+input.value);
     location.replace(  href)
 };
 

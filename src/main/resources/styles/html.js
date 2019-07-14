@@ -1,7 +1,8 @@
-const host = location.origin.replace(/^http/, 'ws');
+const host = location.href.replace(/^http/, 'ws');
 const ws = new WebSocket(host);
 const output = document.querySelector('#terminal');
-const input = document.querySelector('#code');
+
+/*
 input.value= "<!DOCTYPE html>\n" +
 "<html lang=\"en\">\n" +
 "<head>\n" +
@@ -12,6 +13,8 @@ input.value= "<!DOCTYPE html>\n" +
 "\n" +
 "</body>\n" +
 "</html>"
+
+ */
 ws.onopen = () =>{
     console.log('websocket is connected ...');
     // sending a send event to websocket server
