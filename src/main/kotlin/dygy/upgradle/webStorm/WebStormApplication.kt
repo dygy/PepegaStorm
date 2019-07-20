@@ -17,7 +17,6 @@ import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
 import io.ktor.websocket.WebSockets
 import io.ktor.websocket.webSocket
-import kotlinx.coroutines.ObsoleteCoroutinesApi
 import java.io.File
 import java.time.Duration
 
@@ -29,7 +28,6 @@ fun main() {
 		module = Application::main
 	).apply { start(wait = true) }
 }
-@ObsoleteCoroutinesApi
 fun Application.main() {
 	// This adds automatically Date and Server headers to each response, and would allow you to configure
 	// additional headers served to each response.
@@ -39,96 +37,55 @@ fun Application.main() {
 	/**
 	 * Install Websocket
 	 */
-
 	install(WebSockets) {
-		pingPeriod = Duration.ofSeconds(60)
-		timeout = Duration.ofSeconds(15)
+		pingPeriod = Duration.ofSeconds(300)
+		timeout = Duration.ofSeconds(100)
 		maxFrameSize = Long.MAX_VALUE
 		masking = false
-
 	}
-
 	routing {
 		webSocket("/js") {
-			while (true) {
-				when (val frame = incoming.receiveOrNull()) {
+			for (frame in incoming){
+				when (frame) {
 					is Frame.Text -> {
 						val text = frame.readText()
 						//println(text.substring(0,4) == "HTML")
 						when {
-							text.substring(0,4)=="HTML" -> {
-								writeHTML(text.substring(4, text.length))
-							}
 							text.substring(0,4)=="NoJS" -> {
-								writeJS(text.substring(4, text.length))
+								writeNoJS(text.substring(4, text.length))
+								outgoing.send(Frame.Text(JSeval.goJS()))
 							}
 							text.substring(0, 2) == "JS" ->{
 								writeJS(text.substring(2, text.length))
-								outgoing.send(Frame.Text(JSeval.goJS()))
-							}
-							text.substring(0,3)=="CSS" -> {
-								writeCSS(text.substring(3, text.length))
 							}
 						}
 						println(text)
 					}
 				}
 			}
-
 		}
 		webSocket("/html") {
-			while (true) {
-				when (val frame = incoming.receiveOrNull()) {
+			for (frame in incoming){
+				when (frame) {
 					is Frame.Text -> {
 						val text = frame.readText()
-						//println(text.substring(0,4) == "HTML")
-						when {
-							text.substring(0,4)=="HTML" -> {
-								writeHTML(text.substring(4, text.length))
-							}
-							text.substring(0,4)=="NoJS" -> {
-								writeJS(text.substring(4, text.length))
-							}
-							text.substring(0, 2) == "JS" ->{
-								writeJS(text.substring(2, text.length))
-								outgoing.send(Frame.Text(JSeval.goJS()))
-							}
-							text.substring(0,3)=="CSS" -> {
-								writeCSS(text.substring(3, text.length))
-							}
-						}
+						writeHTML(text)
 						println(text)
 					}
 				}
 			}
-
 		}
 		webSocket("/css") {
-			while (true) {
-				when (val frame = incoming.receiveOrNull()) {
+			for (frame in incoming){
+				when (frame) {
 					is Frame.Text -> {
 						val text = frame.readText()
 						//println(text.substring(0,4) == "HTML")
-						when {
-							text.substring(0,4)=="HTML" -> {
-								writeHTML(text.substring(4, text.length))
-							}
-							text.substring(0,4)=="NoJS" -> {
-								writeJS(text.substring(4, text.length))
-							}
-							text.substring(0, 2) == "JS" ->{
-								writeJS(text.substring(2, text.length))
-								outgoing.send(Frame.Text(JSeval.goJS()))
-							}
-							text.substring(0,3)=="CSS" -> {
-								writeCSS(text.substring(3, text.length))
-							}
-						}
+						writeCSS(text)
 						println(text)
 					}
 				}
 			}
-
 		}
 		static("/") {
 			staticRootFolder = File("C:\\Users\\yukim\\IdeaProjects\\webStorm\\src\\main\\resources")
@@ -137,7 +94,6 @@ fun Application.main() {
 		}
 		get ("/js") {
 			call.respondFile(File("C:\\Users\\yukim\\IdeaProjects\\webStorm\\src\\main\\resources\\js.html"))
-
 		}
 		get ("/css") {
 			call.respondFile(File("C:\\Users\\yukim\\IdeaProjects\\webStorm\\src\\main\\resources\\css.html"))

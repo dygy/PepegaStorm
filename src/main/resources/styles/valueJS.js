@@ -1,3 +1,2 @@
 const input = document.querySelector('#code')
-input.value= " alert(\"HeLLO WORLD\")\n " + 
- "        \""
+input.innerText= " console.log(1)"

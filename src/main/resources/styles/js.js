@@ -11,15 +11,15 @@ ws.onmessage = (msg) =>{
         output.innerText = ' ' + msg['data']
     }
     else{
-        input.value= msg['data'].substr(4,msg['data'].length)
+        input.innerText= msg['data'].substr(4,msg['data'].length)
     }
 };
 let toCompile =() =>{
-    console.log('about to send '+document.querySelector('#code').value.toString() )
-    ws.send('JS'+input.value);
+    console.log('about to send '+document.querySelector('#code').innerText.toString() )
+    ws.send('NoJS'+input.innerText);
 };
 let navigateTo=(href)=>{
-    ws.send('NoJS'+input.value);
+    ws.send('JS'+input.innerText);
     location.replace(  href)
 };
 

@@ -21,17 +21,18 @@ ws.onopen = () =>{
 };
 ws.onmessage = (msg) =>{
     console.log(msg);
-    input.value =' '+msg['data']
+    input.innerText =' '+msg['data']
 };
 let toCompile =() =>{
-    console.log('about to send '+input.value.toString());
-    ws.send("HTML "+input.value);
+    console.log('about to send '+input.innerText.toString());
+    ws.send(input.innerText);
     openInNewTab('/run')
 };
 let openInNewTab=(url)=>{
     const win = window.open(url, '_blank');
     win.focus();
 };
+
 for (let x=0;x<25 ;x++){
     let para = document.createElement("span");                       // Create a <p> node
     let t = document.createTextNode((x + 1));      // Create a text node
@@ -39,6 +40,14 @@ for (let x=0;x<25 ;x++){
     document.getElementById("textArea").appendChild(para);           // Append <p> to <div> with id="myDIV"
 }
 let navigateTo=(href)=>{
-    ws.send('HTML'+input.value);
+    ws.send(input.innerText);
     location.replace(  href)
 };
+function getPos() {
+    let sel = document.getSelection(),
+        nd = sel.anchorNode,
+        text = nd.textContent.slice(0, sel.focusOffset);
+
+    const line = text.split("\n").length;
+    const col = text.split("\n").pop().length;
+}

@@ -17,6 +17,15 @@ for (let x=0;x<25 ;x++){
     document.getElementById("textArea").appendChild(para);           // Append <p> to <div> with id="myDIV"
 }
 let navigateTo=(href)=>{
-    ws.send('CSS'+input.value);
+    ws.send(input.innerText);
     location.replace(  href)
+};
+let toCompile =() =>{
+    console.log('about to send '+input.innerText.toString());
+    ws.send(input.innerText);
+    openInNewTab('/run')
+};
+let openInNewTab=(url)=>{
+    const win = window.open(url, '_blank');
+    win.focus();
 };
