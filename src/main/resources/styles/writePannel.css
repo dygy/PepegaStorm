@@ -58,7 +58,10 @@ span{
     border-left: #fbfff9 1px;
     position: absolute;
 }
+
 #textArea{
+    outline: none;
+    font-family: "Courier New";
     position: absolute;
     width: 86.5%;
     height: 85%;
@@ -67,20 +70,28 @@ span{
     top: 7.5%;
     bottom: 7.5%;
 }
+div.scrollbars {
+    max-height: 500px;
+    overflow: auto;
+}
 .code{
+    overflow-wrap: normal;
+    overflow: auto;
     border-right: 1px;
     border-bottom: 1px;
     border-top: 1px;
-    outline:none;
+    outline:none !important;
     color: whitesmoke;
     position: relative;
     background: #2B2B2B;
     width: 100%;
     height: 100%;
-    overflow-wrap: normal;
+    max-height: 100px;
     white-space: pre-wrap;
+    z-index: 3;
 }
 body{
+
     color: whitesmoke;
     background: #3B3F42;
 
@@ -104,4 +115,8 @@ body{
 }
 a{
     color: #fbfff9;
+}
+
+[contenteditable]:focus {
+    outline: 0px solid transparent;
 }

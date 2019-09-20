@@ -19,7 +19,7 @@ internal object JSeval  {
         val engine = NashornScriptEngineFactory().getScriptEngine("--language=es6")
         val sw = StringWriter()
         engine.context.writer = sw
-            engine.eval(FileReader("C:\\Users\\yukim\\IdeaProjects\\webStorm\\src\\main\\resources\\client.js"))
+            engine.eval(FileReader("./src/main/resources/client.js"))
             val invocable = engine as Invocable
             val result = invocable.invokeFunction("fun")
             println("Result returned by eval(): $result")

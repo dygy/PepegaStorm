@@ -4,5 +4,8 @@ function fun (){
                 warn: print,
                 error: print
         };
-console.log(1)
+var lol = "lol"
+console.log(lol)
+
+
  } 

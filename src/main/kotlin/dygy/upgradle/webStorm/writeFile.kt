@@ -3,11 +3,11 @@ package dygy.upgradle.webStorm
 import java.io.File
 
 fun writeJS(content: String) {
-    val fileName = "C:\\Users\\yukim\\IdeaProjects\\webStorm\\src\\main\\resources\\client\\client.js"
+    val fileName = "./src/main/resources/client/client.js"
     val myfile = File(fileName)
     var code = content
     myfile.writeText(code)
-    val clientFileName = "C:\\Users\\yukim\\IdeaProjects\\webStorm\\src\\main\\resources\\styles\\valueJS.js"
+    val clientFileName = "./src/main/resources/styles/valueJS.js"
     val clientFile = File(clientFileName)
     code = "const input = document.querySelector('#code')\n" +
             "input.innerText= "+"\" "+((content).replace("\"","\\\"").replace("\n", "\\n \" + \n \"")+"\"")
@@ -18,7 +18,7 @@ fun writeJS(content: String) {
 }
 
 fun writeNoJS(content: String) {
-    val fileName = "C:\\Users\\yukim\\IdeaProjects\\webStorm\\src\\main\\resources\\client.js"
+    val fileName = "./src/main/resources/client.js"
     val myfile = File(fileName)
     var code = "function fun (){ \n         const console = {\n" +
             "                log: print,\n" +
@@ -26,7 +26,7 @@ fun writeNoJS(content: String) {
             "                error: print\n" +
             "        };\n" +content+ "\n } "
     myfile.writeText(code)
-    val clientFileName = "C:\\Users\\yukim\\IdeaProjects\\webStorm\\src\\main\\resources\\styles\\valueJS.js"
+    val clientFileName = "./src/main/resources/styles/valueJS.js"
     val clientFile = File(clientFileName)
     code = "const input = document.querySelector('#code')\n" +
             "input.innerText= "+"\" "+((content).replace("\"","\\\"").replace("\n", "\\n \" + \n \"")+"\"")
@@ -37,9 +37,9 @@ fun writeNoJS(content: String) {
 }
 
 fun writeHTML(content: String) {
-    val fileName = "C:\\Users\\yukim\\IdeaProjects\\webStorm\\src\\main\\resources\\client\\client.html"
+    val fileName = "./src/main/resources/client/client.html"
     val myfile = File(fileName)
-    val clientFileName = "C:\\Users\\yukim\\IdeaProjects\\webStorm\\src\\main\\resources\\styles\\valueHTML.js"
+    val clientFileName = "./src/main/resources/styles/valueHTML.js"
     val clientFile = File(clientFileName)
     val code = "const input = document.querySelector('#code')\n" +
             "input.innerText= "+"\" "+((content).replace("\"","\\\"").replace("\n", "\\n \" + \n \"")+"\"")
@@ -50,9 +50,9 @@ fun writeHTML(content: String) {
 }
 
 fun writeCSS(content: String) {
-    val fileName = "C:\\Users\\yukim\\IdeaProjects\\webStorm\\src\\main\\resources\\client\\client.css"
+    val fileName = "./src/main/resources/client/client.css"
     val myfile = File(fileName)
-    val clientFileName = "C:\\Users\\yukim\\IdeaProjects\\webStorm\\src\\main\\resources\\styles\\valueCSS.js"
+    val clientFileName = "./src/main/resources/styles/valueCSS.js"
     val clientFile = File(clientFileName)
     val code = "const input = document.querySelector('#code')\n" +
             "input.innerText= "+"\" "+((content).replace("\"","\\\"").replace("\n", "\\n \" + \n \"")+"\"")

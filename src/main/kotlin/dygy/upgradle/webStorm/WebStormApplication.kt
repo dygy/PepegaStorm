@@ -23,7 +23,7 @@ import java.time.Duration
 fun main() {
 	embeddedServer(
 		Netty,
-		watchPaths = listOf("C:\\Users\\yukim\\IdeaProjects\\webStorm\\src\\main"),
+		watchPaths = listOf("./src/main"),
 		port = 8080,
 		module = Application::main
 	).apply { start(wait = true) }
@@ -88,21 +88,21 @@ fun Application.main() {
 			}
 		}
 		static("/") {
-			staticRootFolder = File("C:\\Users\\yukim\\IdeaProjects\\webStorm\\src\\main\\resources")
+			staticRootFolder = File("./src/main/resources")
 			files("styles")
 			files("client")
 		}
 		get ("/js") {
-			call.respondFile(File("C:\\Users\\yukim\\IdeaProjects\\webStorm\\src\\main\\resources\\js.html"))
+			call.respondFile(File("./src/main/resources/js.html"))
 		}
 		get ("/css") {
-			call.respondFile(File("C:\\Users\\yukim\\IdeaProjects\\webStorm\\src\\main\\resources\\css.html"))
+			call.respondFile(File("./src/main/resources/css.html"))
 		}
 		get ("/html") {
-			call.respondFile(File("C:\\Users\\yukim\\IdeaProjects\\webStorm\\src\\main\\resources\\html.html"))
+			call.respondFile(File("./src/main/resources/html.html"))
 		}
 		get("/run") {
-			call.respondFile(File("C:\\Users\\yukim\\IdeaProjects\\webStorm\\src\\main\\resources\\client\\client.html"))
+			call.respondFile(File("./src/main/resources/client/client.html"))
 		}
 	}
 }

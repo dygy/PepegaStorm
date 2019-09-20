@@ -10,12 +10,7 @@ ws.onmessage = (msg) =>{
     input.value =' '+msg['data']
 };
 
-for (let x=0;x<25 ;x++){
-    let para = document.createElement("span");                       // Create a <p> node
-    let t = document.createTextNode((x + 1));      // Create a text node
-    para.appendChild(t);                                          // Append the text to <p>
-    document.getElementById("textArea").appendChild(para);           // Append <p> to <div> with id="myDIV"
-}
+
 let navigateTo=(href)=>{
     ws.send(input.innerText);
     location.replace(  href)

@@ -1,1 +1,2 @@
-console.log(1)
+var lol = "lol"
+console.log(lol)
