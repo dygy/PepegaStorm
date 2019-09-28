@@ -7,7 +7,7 @@ for (lines;lines<input.clientHeight/19;++lines){
     document.getElementById("textArea").appendChild(para);           // Append <p> to <div> with id="myDIV"
 }
 input.addEventListener("new line",()=>{
-
+ console.log("new line")
 },false);
 let addLine =()=>{
 
@@ -23,14 +23,14 @@ let deleteLine =()=>{
     lines--;
 };
 input.addEventListener('keydown', (event) => {
-    console.log(event.which)
+    //console.log(event.which)
     if (event.which === 13) {
         if (input.clientHeight/lines >15) {
             addLine()
         }
     }
     else if (event.which === 8){
-        console.log(input.clientHeight/lines);
+     //   console.log(input.clientHeight/lines);
         if (input.clientHeight/lines <15) {
             deleteLine();
         }
@@ -53,15 +53,9 @@ function onKeyDown(e) {
     sel.removeAllRanges();
     sel.addRange(range);
 }
-
 input.addEventListener("paste", function(e) {
     e.preventDefault();
     const text = (e.originalEvent || e).clipboardData.getData('text/plain');
     document.execCommand("insertText", false, text);
-    /*
-       setTimeout(()=>{
-           input.innerHTML = input.innerHTML.replace(/(<.*?>)/g,"<br>")
-       })
-
-     */
+    lexering();
 });

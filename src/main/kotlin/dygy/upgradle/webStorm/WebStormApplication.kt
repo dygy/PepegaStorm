@@ -5,11 +5,15 @@ import io.ktor.application.call
 import io.ktor.application.install
 import io.ktor.features.CallLogging
 import io.ktor.features.DefaultHeaders
+import io.ktor.features.StatusPages
+import io.ktor.features.statusFile
+import io.ktor.http.HttpStatusCode
 import io.ktor.http.cio.websocket.Frame
 import io.ktor.http.cio.websocket.readText
 import io.ktor.http.content.files
 import io.ktor.http.content.static
 import io.ktor.http.content.staticRootFolder
+import io.ktor.response.respond
 import io.ktor.response.respondFile
 import io.ktor.routing.get
 import io.ktor.routing.routing
@@ -29,6 +33,9 @@ fun main() {
 	).apply { start(wait = true) }
 }
 fun Application.main() {
+	install(StatusPages) {
+		statusFile(HttpStatusCode.NotFound, HttpStatusCode.Unauthorized, filePattern = "./src/main/resources/error404.html")
+	}
 	// This adds automatically Date and Server headers to each response, and would allow you to configure
 	// additional headers served to each response.
 	install(DefaultHeaders)
@@ -44,6 +51,7 @@ fun Application.main() {
 		masking = false
 	}
 	routing {
+
 		webSocket("/js") {
 			for (frame in incoming){
 				when (frame) {
@@ -103,6 +111,9 @@ fun Application.main() {
 		}
 		get("/run") {
 			call.respondFile(File("./src/main/resources/client/client.html"))
+		}
+		get("/") {
+			call.respondFile(File("./src/main/resources/error404.html"))
 		}
 	}
 }

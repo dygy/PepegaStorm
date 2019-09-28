@@ -1,4 +1,9 @@
-
+.keyword{
+ color: orangered;
+}
+.string{
+    color: green;
+}
 #navbar {
     background: #3C3D44;
     position: absolute;

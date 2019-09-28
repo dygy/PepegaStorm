@@ -1,2 +1,2 @@
-var lol = "lol"
+var lol = "lol" 
 console.log(lol)
