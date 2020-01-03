@@ -1,15 +1,39 @@
+.pepegabar{
+    white-space: nowrap;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    width: 170px;
+}
+.pepegabar img {
+    margin-left: 50px;
+    margin-right: 10px;
+    height: 6vh;
+    width: 6vh;
+}
 .keyword{
  color: orangered;
 }
 .string{
     color: green;
 }
+.comment{
+    color: gray;
+}
+.propper{
+    color: purple;
+}
+.functio{
+    color: yellow;
+}
 #navbar {
     background: #3C3D44;
     position: absolute;
     top: 0;
+    left: 0;
     height: 7.5%;
-    width: 99%;
+    width: 100%;
 }
 #run{
     position: absolute;
@@ -104,7 +128,8 @@ body{
 #chosePanel{
     position: absolute;
     bottom: 0;
-    width: 99%;
+    left: 0;
+    width: 100%;
     height: 7.5%;
     background: #3B3F42;
 

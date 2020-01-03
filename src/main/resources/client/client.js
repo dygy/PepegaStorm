@@ -1,2 +1,5 @@
-var lol = "lol" 
-console.log(lol)
+var x
+
+
+//sdasdfafsaf 
+

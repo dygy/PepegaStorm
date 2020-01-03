@@ -5,43 +5,85 @@ const keywords = [
 ]
 let range = document.createRange();
 const sel = window.getSelection();
-range.setStart(input.childNodes[2], 5);
+try {
+    range.setStart(input.childNodes[2], 5);
+}
+catch (e) {
+}
 range.collapse(true);
 sel.removeAllRanges();
 sel.addRange(range);
-
 // TODO:: Rewrite FULLY
 function lexering() {
-    let content = input.innerText;
-    input.innerHTML="";
-    input.innerText = content;
-    let word ="";
-    for (let x=0 ;x<input.innerText.length;x++ ){
-        if (input.innerText[x]!==";" && input.innerText[x]!==" " && input.innerText[x]!=="\n"&&input.innerText[x]!=="." && (x+1<input.innerText.length) ){
-            word +=input.innerText[x]
-        }
-        else  {
-           // console.log(word);
-            if(word!==""||word!==" "||word==="\n"){
-                for (let y = 0;y<keywords.length ;y++) {
-                    if (word === keywords[y]) {
-                       // console.log("got " + word);
-                        input.innerHTML = input.innerHTML.replace(word, `<text class="keyword">${word}</text>`)
-                    }
-                }
-                if (checkIfString(word)) {
-                    input.innerHTML = input.innerHTML.replace(word, `<text class="string">${word}</text>`)
-                } else {
-                    if (word !== "") {
-                     //   console.log("didn't get " + word);
-                    }
-                }
+    // group one - comments |gray  |
+    // group two - keywords |orange|
+    // group three - funcs  |yellow|
+    // group four - props   |purple|
+    // parse str and regex  |green |
+    const exps=[];
+    let code = input.innerHTML;
+    const regex = / ?(const|var|let|function|async|await| const|if|else|switch|case|break|yield|do|while |for|try|catch|return|true|false|undefiend) |([A-Za-z0-9]*) *\(.*\)|\.([A-Za-z0-9]*) */gm;
+    let m;
 
-            }
-            word=''
+    while ((m = regex.exec(input.innerHTML)) !== null) {
+        // This is necessary to avoid infinite loops with zero-width matches
+        if (m.index === regex.lastIndex) {
+            regex.lastIndex++;
         }
+
+        // The result can be accessed through the `m`-variable.
+        m.forEach(function(match,groupIndex) {
+            console.log(match);
+            if (match !== undefined && match!=="" && groupIndex!==0) {
+                exps.push({
+                    exp:match,
+                    type: groupIndex,
+                    index: arguments[2].index,
+                    lastIndex:arguments[2].index+match.length
+                });
+                //console.log(`Found match, group ${groupIndex}: ${match}`);
+            }});
+    }
+    exps.forEach((i)=>{
+        console.log(i);
+        if (i.type === 1){
+            input.innerHTML= store(i.index,i.lastIndex,`<text class="keyword"  contenteditable="false">${i.exp}</text>`,input.innerHTML,"keyword")
+        }
+        else if (i.type === 2){
+            input.innerHTML= store(i.index,i.lastIndex,`<text class="functio"  contenteditable="false">${i.exp}</text>`,input.innerHTML, "functio")
+        }
+        else if (i.type === 3){
+            input.innerHTML= store(i.index,i.lastIndex,`<text class="propper"  contenteditable="true">${i.exp}</text>`,input.innerHTML, "propper")
+        }
+    })
+
+    //concater();
+
+}
+function store(index, lastIndex, value, string, type) {
+    //TODO: Store info
+
+    let left = string.substr(0,index);
+    const middle = value;
+    let right
+    if (type === "functio"){
+        right = string.substr(lastIndex, string.length);
+        return left+" "+middle+" "+right;
+    }
+    else if (type==="propper"){
+        left = string.substr(0,index+1);
+        right = string.substr(lastIndex + 1, string.length);
+        return left+""+middle+" "+right;
     }
 
+    else {
+        right = string.substr(lastIndex + 1, string.length);
+        return left+""+middle+" "+right;
+    }
+    console.log(left+" !!!"+right);
+}
+function concater() {
+    //TODO: create HTML Text;
 }
 function checkIfString(str){
     str.replace(" ","")
@@ -53,6 +95,7 @@ input.addEventListener("input",function (e) {
     const caretPos = getCurrentCursorPosition("code")+9;
     lexering();
     setCurrentCursorPosition(caretPos)
+
 },false);
 
 const getContext =(index,text)=>{
@@ -166,3 +209,4 @@ function getCurrentCursorPosition(parentId) {
 };
 
 lexering();
+
