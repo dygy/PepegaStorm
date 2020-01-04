@@ -10,7 +10,6 @@ buildscript {
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath "org.gradle.api.plugins:gradle-heroku:0.9.6"
     }
 }
 
