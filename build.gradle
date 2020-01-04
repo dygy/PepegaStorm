@@ -13,7 +13,12 @@ buildscript {
     }
 }
 
-apply plugin: 'kotlin'
+apply {
+    plugin( 'kotlin')
+    plugin("application")
+}
+
+mainClassName = 'dygy.upgradle.webStorm.WebStormApplicationKt'
 sourceCompatibility = 1.8
 compileKotlin { kotlinOptions.jvmTarget = "1.8" }
 compileTestKotlin { kotlinOptions.jvmTarget = "1.8" }
@@ -27,6 +32,7 @@ repositories {
     maven { url "https://dl.bintray.com/kotlin/ktor" }
     jcenter()
 }
+
 dependencies {
     compile group: 'io.ktor', name: 'ktor-http-jvm', version: '1.2.2'
     compile group: 'io.ktor', name: 'ktor-utils-jvm', version: '1.2.2'
@@ -39,9 +45,5 @@ dependencies {
     testCompile "io.ktor:ktor-server-tests:$ktor_version"
     compile "io.ktor:ktor-websockets:$ktor_version"
 }
-task copyToLib(type: Copy) {
-    into "$buildDir/libs"
-    from(configurations.compile)
-}
-
-stage.dependsOn(copyToLib)
+task stage(dependsOn: ['build', 'clean'])
+build.mustRunAfter clean
