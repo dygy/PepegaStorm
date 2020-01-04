@@ -4,6 +4,7 @@ function fun (){
                 warn: print,
                 error: print
         };
-var lol = "lol"; 
-console.log(lol);
+ let x = 9;
+ console.log(x);
+  
  } 

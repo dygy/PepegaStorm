@@ -2,9 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Write Panel for HTML</title>
+    <title>Write Panel for JS</title>
     <link href="writePannel.css" rel="stylesheet">
-</head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.35.0/codemirror.css">
+    <link rel="stylesheet" href="https://codemirror.net/theme/darcula.css">
+    <script src="./lib/codemirror.js"></script>
+    <script src="./addon/hint/show-hint.js"></script>
+    <script src="./addon/hint/xml-hint.js"></script>
+    <script src="./addon/hint/html-hint.js"></script>
+    <script src="./mode/xml/xml.js"></script>
+    <script src="./mode/javascript/javascript.js"></script>
+    <script src="./mode/css/css.js"></script>
+    <script src="./mode/htmlmixed/htmlmixed.js"></script>
+    <script src="./edit/closetag.js"></script>
 <body>
 <div id="navbar">
     <div id="config">
@@ -23,19 +33,30 @@
     <span> <a onclick="navigateTo('/css')"> client.css </a></span>
 </div>
 <div  id="textArea">
-    <div id="leftBorder">
-        <div id="code" contenteditable="true">
-
-        </div>
-    </div>
+    <textarea id='editor'>
+    </textarea>
 </div>
 <div id="footer">
     <div id="chosePanel">
         <div id="terminal"> </div>
     </div>
 </div>
+<script>
+    let editor = CodeMirror.fromTextArea(document.getElementById('editor'), {
+        mode: 'htmlmixed',
+        lineNumbers: true,
+        theme:'darcula',
+        lineWrapping: true,
+        autoCloseBrackets:true,
+        extraKeys: {"Ctrl-Q": function(cm){ cm.foldCode(cm.getCursor()); }, "Ctrl-Space": "autocomplete"},
+        foldGutter: true,
+        gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+    });
+    editor.save()
+
+</script>
 <script src="valueHTML.js"></script>
 <script src="html.js"></script>
-<script src="lineGenerator.js"></script>
+<script src="pepega.js"></script>
 </body>
 </html>

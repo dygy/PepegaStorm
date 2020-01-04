@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Write Panel for JS</title>
+    <link href="writePannel.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.35.0/codemirror.css">
+    <link rel="stylesheet" href="https://codemirror.net/theme/darcula.css">
+    <script src="./lib/codemirror.js"></script>
+    <script src="./mode/javascript/javascript.js"></script>
+    <script src="./edit/closebrackets.js"></script>
+</head>
+<body>
+<div id="navbar">
+    <div id="config">
+        <div class="pepegabar">
+            <img src="./pepega.png" onclick="spinner()"/>
+            <strong> PEPEGA Storm</strong>
+        </div>
+        <button id="run" onclick="toCompile()" >
+            <div id="triangle-right"> </div>
+        </button>
+    </div>
+</div>
+<div id="lefbar">
+    <span> <a onclick="navigateTo('/html')"> client.html </a> </span>
+    <span> <a onclick="navigateTo('/js')"> client.js </a></span>
+    <span> <a onclick="navigateTo('/css')"> client.css </a></span>
+</div>
+<div  id="textArea">
+    <textarea id='editor'>
+    </textarea>
+</div>
+<div id="footer">
+    <div id="chosePanel">
+        <div id="terminal"> </div>
+    </div>
+</div>
+<script>
+    let editor = CodeMirror.fromTextArea(document.getElementById('editor'), {
+        mode: "javascript",
+        lineNumbers: true,
+        theme:'darcula',
+        lineWrapping: true,
+        autoCloseBrackets:true,
+        extraKeys: {"Ctrl-Q": function(cm){ cm.foldCode(cm.getCursor()); }},
+        foldGutter: true,
+        gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+    });
+    editor.save()
+
+</script>
+<script src="valueJS.js"></script>
+<script src="js.js"></script>
+<script src="pepega.js"></script>
+</body>
+</html>

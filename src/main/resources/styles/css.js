@@ -9,15 +9,13 @@ ws.onmessage = (msg) =>{
     console.log(msg);
     input.value =' '+msg['data']
 };
-
-
 let navigateTo=(href)=>{
-    ws.send(input.innerText);
-    location.replace(  href)
+    ws.send(editor.getValue("\n"));
+    location.replace(href)
 };
 let toCompile =() =>{
-    console.log('about to send '+input.innerText.toString());
-    ws.send(input.innerText);
+    console.log('about to send '+editor.getValue("\n"));
+    ws.send(editor.getValue("\n"));
     openInNewTab('/run')
 };
 let openInNewTab=(url)=>{

@@ -13,15 +13,15 @@ catch (e) {
 range.collapse(true);
 sel.removeAllRanges();
 sel.addRange(range);
-// TODO:: Rewrite FULLY
 function lexering() {
+    getStr();
     // group one - comments |gray  |
     // group two - keywords |orange|
     // group three - funcs  |yellow|
     // group four - props   |purple|
     // parse str and regex  |green |
+
     const exps=[];
-    let code = input.innerHTML;
     const regex = / ?(const|var|let|function|async|await| const|if|else|switch|case|break|yield|do|while |for|try|catch|return|true|false|undefiend) |([A-Za-z0-9]*) *\(.*\)|\.([A-Za-z0-9]*) */gm;
     let m;
 
@@ -60,37 +60,115 @@ function lexering() {
     //concater();
 
 }
+function chekSpam(string,index) {
+    if(string.substr(index-20,index).contains('<text class="string"')){
+        return true
+    }
+    else {
+        return false
+    }
+}
+function getStr() {
+    let arr = [];
+    let startTwo=null;
+    let endTwo=null;
+    let startOne=null;
+    let endOne=null;
+    let comstart = null;
+    //input.innerHTML = store(comstart - 1, y - 1, `<text class="comment"  contenteditable="true">${input.innerHTML.substr(comstart, y - 1)}</text>`, input.innerHTML, "comment")
+    //input.innerHTML= store(startOne,endOne,`<text class="string"  contenteditable="true">${input.innerHTML.substr(startOne,endOne)}</text>`,input.innerHTML, "string");
+    //input.innerHTML= store(startTwo,endTwo,`<text class="string"  contenteditable="true">${input.innerHTML.substr(startTwo,endTwo)}</text>`,input.innerHTML, "string");
+    for (let x=0;x<input.innerHTML.length;x++){
+        if ( input.innerHTML[x]==="<" && input.innerHTML[x+1]==="t" && input.innerHTML[x+2]==="e"){
+            console.log(input.innerHTML[x]+"    2   ");
+            let changed =false
+            for (let y=x;y<input.innerHTML.length;y++){
+                if (input.innerHTML[y]==="/"&&input.innerHTML[y+1]==="t"&&input.innerHTML[y+1]==="e"){
+                    x=y+5;
+                    console.log(input.innerHTML[x]+"    1   ");
+                    y= input.innerHTML.length;
+                    changed=true;
+                }
+            }
+            if (!changed){
+                x=input.innerHTML.length
+            }
+        }
+        else if (input.innerHTML[x]==="/" && input.innerHTML[x+1]==="/"){
+            comstart=x;
+            for (let y=comstart;y<input.innerHTML.length;y++) {
+                if (input.innerHTML.length > y + 2) {
+                    if (input.innerHTML[y] === "<" && input.innerHTML[y + 1] === "b" && input.innerHTML[y + 2] === "r") {
+                        /*
+                        arr.push({
+                            start:comstart,
+                            end: y-1,
+                            type: "comment",
+                            value:input.innerHTML.substr(comstart,y-1)
+                        });
+                         */
+                        input.innerHTML = store(comstart - 1, y - 1, `<text class="comment"  contenteditable="true">${input.innerHTML.substr(comstart, y-comstart)}</text>`, input.innerHTML, "comment")
+                        comstart = null;
+                        y = input.innerHTML.length;
+                        x = y - 1;
+                    }
+                }
+            }
+        }
+        else if (input.innerHTML[x]==="'" && startOne===null){
+            startOne = x;
+        }
+        else if (input.innerHTML[x]==="'" && startOne!==null){
+            endOne = x;
+            input.innerHTML= store(startOne,endOne,`<text class="string"  contenteditable="true">${input.innerHTML.substr(startOne,endOne-startOne+1)}</text>`,input.innerHTML, "string");
+            console.log(startOne+" "+endOne);
+            startOne = null;
+            endOne = null;
+            x=0
+        }
+        else if (input.innerHTML[x]==='"' && startTwo===null){
+            startTwo = x;
+        }
+        else if (input.innerHTML[x]==='"' && startTwo!==null){
+            endTwo = x;
+            console.log(startTwo+" "+endTwo);
+            //input.innerHTML=store(startTwo,endTwo, `<text class="string"  contenteditable="true">${input.innerHTML.substr(startTwo,endTwo-startTwo+1)}</text>`,input.innerHTML, "string");
+            startTwo = null;
+            endTwo = null;
+            //x=0
+            //TODO; think how to get last index  of created tag
+        }
+
+    }
+}
 function store(index, lastIndex, value, string, type) {
     //TODO: Store info
-
     let left = string.substr(0,index);
     const middle = value;
-    let right
+    let right;
+    console.log(value+" !!!");
     if (type === "functio"){
-        right = string.substr(lastIndex, string.length);
+        right = string.substr(lastIndex, string.length-lastIndex);
+        return left+" "+middle+" "+right;
+    }
+    else if (type==="string"){
+        right = string.substr(lastIndex+1, string.length-lastIndex-2);
         return left+" "+middle+" "+right;
     }
     else if (type==="propper"){
         left = string.substr(0,index+1);
-        right = string.substr(lastIndex + 1, string.length);
-        return left+""+middle+" "+right;
+        right = string.substr(lastIndex + 1, string.length-lastIndex);
+        return left+" "+middle+" "+right;
     }
-
     else {
-        right = string.substr(lastIndex + 1, string.length);
-        return left+""+middle+" "+right;
+        right = string.substr(lastIndex + 1, string.length-lastIndex-1);
+        return left+" "+middle+" "+right;
     }
-    console.log(left+" !!!"+right);
 }
 function concater() {
     //TODO: create HTML Text;
 }
-function checkIfString(str){
-    str.replace(" ","")
-    console.log(str[0]+""+str[str.length-1]);
-    return str[0] + str[str.length - 1] === '""' || str[0] + str[str.length - 1] === "''" || str[0] + str[str.length - 1] === '``';
 
-}
 input.addEventListener("input",function (e) {
     const caretPos = getCurrentCursorPosition("code")+9;
     lexering();

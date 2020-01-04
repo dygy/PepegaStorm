@@ -1,3 +1,4 @@
+
 .pepegabar{
     white-space: nowrap;
     display: flex;
@@ -12,21 +13,6 @@
     height: 6vh;
     width: 6vh;
 }
-.keyword{
- color: orangered;
-}
-.string{
-    color: green;
-}
-.comment{
-    color: gray;
-}
-.propper{
-    color: purple;
-}
-.functio{
-    color: yellow;
-}
 #navbar {
     background: #3C3D44;
     position: absolute;
@@ -34,6 +20,9 @@
     left: 0;
     height: 7.5%;
     width: 100%;
+}
+#terminal{
+    padding-left: 3%;
 }
 #run{
     position: absolute;
@@ -58,12 +47,10 @@
 ::-webkit-scrollbar {
     width: 10px;
 }
-
 /* Track */
 ::-webkit-scrollbar-track {
     border-radius: 5px;
 }
-
 /* Handle */
 ::-webkit-scrollbar-thumb {
     background: #5b5c63
@@ -90,7 +77,6 @@ span{
 
 #textArea{
     outline: none;
-    font-family: "Courier New";
     position: absolute;
     width: 86.5%;
     height: 85%;
@@ -99,26 +85,18 @@ span{
     top: 7.5%;
     bottom: 7.5%;
 }
+#textArea span{
+    padding: 0;
+    display: inline;
+}
+.CodeMirror{
+    height: 100%!important;
+}
 div.scrollbars {
     max-height: 500px;
     overflow: auto;
 }
-.code{
-    overflow-wrap: normal;
-    overflow: auto;
-    border-right: 1px;
-    border-bottom: 1px;
-    border-top: 1px;
-    outline:none !important;
-    color: whitesmoke;
-    position: relative;
-    background: #2B2B2B;
-    width: 100%;
-    height: 100%;
-    max-height: 100px;
-    white-space: pre-wrap;
-    z-index: 3;
-}
+
 body{
 
     color: whitesmoke;

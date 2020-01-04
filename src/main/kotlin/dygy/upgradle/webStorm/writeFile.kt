@@ -9,8 +9,7 @@ fun writeJS(content: String) {
     myfile.writeText(code)
     val clientFileName = "./src/main/resources/styles/valueJS.js"
     val clientFile = File(clientFileName)
-    code = "const input = document.querySelector('#code')\n" +
-            "input.innerText= "+"\" "+((content).replace("\"","\\\"").replace("\n", "\\n \" + \n \"")+"\"")
+    code = "editor.setValue("+"\""+((content).replace("\"","\\\"").replace("\n", "\\n \" + \n \"")+"\")")
     clientFile.writeText(code)
     clientFile.writeText(code)
     println("Writed to JS")
@@ -28,8 +27,7 @@ fun writeNoJS(content: String) {
     myfile.writeText(code)
     val clientFileName = "./src/main/resources/styles/valueJS.js"
     val clientFile = File(clientFileName)
-    code = "const input = document.querySelector('#code')\n" +
-            "input.innerText= "+"\" "+((content).replace("\"","\\\"").replace("\n", "\\n \" + \n \"")+"\"")
+    code = "editor.setValue("+"\""+((content).replace("\"","\\\"").replace("\n", "\\n \" + \n \"")+"\")")
     clientFile.writeText(code)
     clientFile.writeText(code)
     println("Writed to NoJS")
@@ -41,12 +39,10 @@ fun writeHTML(content: String) {
     val myfile = File(fileName)
     val clientFileName = "./src/main/resources/styles/valueHTML.js"
     val clientFile = File(clientFileName)
-    val code = "const input = document.querySelector('#code')\n" +
-            "input.innerText= "+"\" "+((content).replace("\"","\\\"").replace("\n", "\\n \" + \n \"")+"\"")
+    val code = "editor.setValue("+"\""+((content).replace("\"","\\\"").replace("\n", "\\n \" + \n \"")+"\")")
     clientFile.writeText(code)
     myfile.writeText(content)
     println("Writed to HTML")
-
 }
 
 fun writeCSS(content: String) {
@@ -54,10 +50,8 @@ fun writeCSS(content: String) {
     val myfile = File(fileName)
     val clientFileName = "./src/main/resources/styles/valueCSS.js"
     val clientFile = File(clientFileName)
-    val code = "const input = document.querySelector('#code')\n" +
-            "input.innerText= "+"\" "+((content).replace("\"","\\\"").replace("\n", "\\n \" + \n \"")+"\"")
+    val code = "editor.setValue("+"\""+((content).replace("\"","\\\"").replace("\n", "\\n \" + \n \"")+"\")")
     clientFile.writeText(code)
     myfile.writeText(content)
     println("Writed to CSS")
-
 }

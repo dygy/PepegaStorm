@@ -101,7 +101,7 @@ fun Application.main() {
 			files("client")
 		}
 		get ("/js") {
-			call.respondFile(File("./src/main/resources/js.html"))
+			call.respondFile(File("./src/main/resources/js2.html"))
 		}
 		get ("/css") {
 			call.respondFile(File("./src/main/resources/css.html"))

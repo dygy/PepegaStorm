@@ -1,5 +1,2 @@
-var x
-
-
-//sdasdfafsaf 
-
+let x = 0;
+ c
