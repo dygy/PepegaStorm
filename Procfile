@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -jar app.jar
+web: build/install/kotlinserver/bin/kotlinserver
