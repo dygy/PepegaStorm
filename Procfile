@@ -1,1 +1,1 @@
-web: chmod a+x gradlew && ./gradlew run
+web: java -jar target/app.jar
