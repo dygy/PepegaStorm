@@ -1,1 +1,1 @@
-web: build/install/kotlinserver/bin/kotlinserver
+web: chmod a+x gradlew && ./gradlew run

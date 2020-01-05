@@ -46,3 +46,5 @@ dependencies {
 task stage {
     dependsOn installDist
 }
+run.mustRunAfter(stage)
+

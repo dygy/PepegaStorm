@@ -25,11 +25,10 @@ import java.io.File
 import java.time.Duration
 
 fun main() {
-	val port = System.getenv("PORT")?.toInt() ?: 23567
 	embeddedServer(
 		Netty,
 		watchPaths = listOf("./src/main"),
-		port = port,
+		port = 8080,
 		module = Application::main
 	).apply { start(wait = true) }
 }
