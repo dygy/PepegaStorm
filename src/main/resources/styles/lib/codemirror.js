@@ -6875,6 +6875,7 @@
         var moveInStorageOrder = (dir < 0) == (part.level == 1);
         var sticky = moveInStorageOrder ? "after" : "before";
         var ch;
+        var ch;
         // With a wrapped rtl chunk (possibly spanning multiple bidi parts),
         // it could be that the last bidi part is not on the last visual line,
         // since visual lines contain content order-consecutive chunks.
@@ -7245,8 +7246,8 @@
     // Turn mouse into crosshair when Alt is held on Mac.
     if (code == 18 && !/\bCodeMirror-crosshair\b/.test(cm.display.lineDiv.className))
       { showCrossHair(cm); }
+  //TODO:// Watch for this code segment
   }
-
   function showCrossHair(cm) {
     var lineDiv = cm.display.lineDiv;
     addClass(lineDiv, "CodeMirror-crosshair");

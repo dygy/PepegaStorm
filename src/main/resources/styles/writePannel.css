@@ -55,7 +55,8 @@
 ::-webkit-scrollbar-thumb {
     background: #5b5c63
 }
-span{
+
+#lefbar span{
     padding-left: 20px;
     display: block;
 }
