@@ -43,4 +43,8 @@ dependencies {
     compile "io.ktor:ktor-websockets:$ktor_version"
 }
 
+task stage {
+    dependsOn installDist
+}
+run.mustRunAfter(stage)
 
