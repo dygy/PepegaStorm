@@ -7,7 +7,7 @@ ws.onopen = () =>{
 };
 ws.onmessage = (msg) =>{
     console.log(msg);
-    input.value =' '+msg['data']
+    editor.setValue(''+msg['data'])
 };
 let navigateTo=(href)=>{
     ws.send(editor.getValue("\n"));

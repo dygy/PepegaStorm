@@ -9,7 +9,7 @@ ws.onopen = () =>{
 };
 ws.onmessage = (msg) =>{
     console.log(msg);
-    editor.setValue(' '+msg['data'])
+    editor.setValue(''+msg['data'])
 };
 let toCompile =() =>{
     console.log('about to send '+editor.getValue("\n"));
@@ -23,5 +23,5 @@ let openInNewTab=(url)=>{
 
 let navigateTo=(href)=>{
     ws.send(editor.getValue("\n"));
-    location.replace(  href)
+    location.replace(href)
 };

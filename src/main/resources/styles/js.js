@@ -10,7 +10,7 @@ ws.onopen = () =>{
 ws.onmessage = (msg) =>{
     console.log(msg);
     if (msg['data'].substr(0,4)!=='IНPУ') {
-        output.innerText = ' ' + msg['data']
+        output.innerText = '' + msg['data']
     }
     else{
         editor.setValue(msg['data'].substr(4,msg['data'].length));

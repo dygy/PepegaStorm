@@ -25,7 +25,7 @@ import java.io.File
 import java.time.Duration
 
 fun main() {
-	val port = System.getenv("PORT")?.toInt() ?: 22496
+	val port = System.getenv("PORT")?.toInt() ?: 8080
 	embeddedServer(
 		Netty,
 		watchPaths = listOf("./src/main"),
