@@ -42,9 +42,15 @@ dependencies {
     testCompile "io.ktor:ktor-server-tests:$ktor_version"
     compile "io.ktor:ktor-websockets:$ktor_version"
 }
-jar{
-    baseName = 'countries-'
-    version = '1.0-SNAPSHOT'
+jar {
+    manifest {
+        attributes 'Main-Class': 'dygy.upgradle.webStorm/WebStormApplicationKt'
+    }
+    from {
+        configurations.compile.collect {
+            it.isDirectory()? it: zipTree(it)
+        }
+    }
 }
 task stage {
     dependsOn installDist
