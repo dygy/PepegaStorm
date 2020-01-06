@@ -42,9 +42,11 @@ dependencies {
     testCompile "io.ktor:ktor-server-tests:$ktor_version"
     compile "io.ktor:ktor-websockets:$ktor_version"
 }
-
+jar{
+    baseName = 'countries-'
+    version = '1.0-SNAPSHOT'
+}
 task stage {
     dependsOn installDist
 }
-run.mustRunAfter(stage)
 
