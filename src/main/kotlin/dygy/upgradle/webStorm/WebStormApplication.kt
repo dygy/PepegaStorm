@@ -15,6 +15,7 @@ import io.ktor.http.content.static
 import io.ktor.http.content.staticRootFolder
 import io.ktor.response.respond
 import io.ktor.response.respondFile
+import io.ktor.response.respondText
 import io.ktor.routing.get
 import io.ktor.routing.routing
 import io.ktor.server.engine.embeddedServer
@@ -100,6 +101,16 @@ fun Application.main() {
 			staticRootFolder = File("./src/main/resources")
 			files("styles")
 			files("client")
+		}
+		get ("/file/{fileName}") {
+			var x = call.parameters["fileName"]
+			x =x?.replace('^','.')
+			println(x)
+			//TODO: replace Value of .fileRes .js to file container and respond with .html file
+			call.respondText("LOL")
+		}
+		get ("/files") {
+			call.respondText(getFiles().toString())
 		}
 		get ("/js") {
 			call.respondFile(File("./src/main/resources/js2.html"))

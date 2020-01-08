@@ -55,3 +55,13 @@ fun writeCSS(content: String) {
     myfile.writeText(content)
     println("Writed to CSS")
 }
+fun getFiles(): MutableList<String> {
+    val files: MutableList<String> =  mutableListOf()
+    val dirPath = "./src/main/resources/client/"
+    File(dirPath).walk().forEach {
+        if (!it.name.equals("client")) {
+            files.add(it.name)
+        }
+    }
+    return files
+}

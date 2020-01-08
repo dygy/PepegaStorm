@@ -24,3 +24,27 @@ function spinner() {
         }
     },3000)
 }
+getFiles();
+async function getFiles() {
+    await fetch("./files")
+        .then(response=>{
+            return response.text()
+        })
+        .then(function (defs) {
+            console.log(defs);
+            let str= defs;
+            str =  str.replace("[",'');
+            str = str.replace("]",'');
+            let arr = str.split(",");
+            for (let x = 0; x<arr.length;x++){
+                arr[x] = arr[x].replace(" ",'');
+                document.getElementById("lefbar").innerHTML+=
+                    `<span onclick="navigateTo('./file/${arr[x].replace('.','^')}')">
+                        ${arr[x]}
+                            </span>`
+            }
+        })
+        .catch(
+            // Отправить на сервер для метрики
+        );
+}
