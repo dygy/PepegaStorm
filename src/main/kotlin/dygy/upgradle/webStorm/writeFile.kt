@@ -1,9 +1,33 @@
 package dygy.upgradle.webStorm
 
 import java.io.File
+import java.io.FileReader
+fun createDoc( fileName: String, fileRes: String){
+    val fileName = "./src/main/resources/client/$fileName"
+    val myfile = File(fileName).createNewFile()
+    val content = ""
+    val clientFileName = "./src/main/resources/styles/value${fileRes.toUpperCase()}.js"
+    val clientFile = File(clientFileName)
+    val code = "editor.setValue("+"\""+((content).replace("\"","\\\"").replace("\n", "\\n\"+\n\"")+"\")")
+    clientFile.writeText(code)
+    clientFile.writeText(code)
+    println("Create $fileName")
+}
+fun setDoc(fileName :  String, fileRes:String){
+    val fileName = "./src/main/resources/client/$fileName"
+    val myfile = File(fileName)
+    val content = File(fileName).readText(Charsets.UTF_8)
+    val clientFileName = "./src/main/resources/styles/value${fileRes.toUpperCase()}.js"
+    val clientFile = File(clientFileName)
+    val code = "editor.setValue("+"\""+((content).replace("\"","\\\"").replace("\n", "\\n\"+\n\"")+"\")")
+    clientFile.writeText(code)
+    clientFile.writeText(code)
+    println("Writed to $fileName")
+}
 
-fun writeJS(content: String) {
-    val fileName = "./src/main/resources/client/client.js"
+fun writeJS(content: String ,fileName: String) {
+    val fileName = if (fileName==="") { "./src/main/resources/client/client.js" }
+    else{ "./src/main/resources/client/$fileName" }
     val myfile = File(fileName)
     var code = content
     myfile.writeText(code)
@@ -11,12 +35,12 @@ fun writeJS(content: String) {
     val clientFile = File(clientFileName)
     code = "editor.setValue("+"\""+((content).replace("\"","\\\"").replace("\n", "\\n\"+\n\"")+"\")")
     clientFile.writeText(code)
-    clientFile.writeText(code)
-    println("Writed to JS")
+    myfile.writeText(content)
+    println("Writed to JS $fileName")
 
 }
 
-fun writeNoJS(content: String) {
+fun writeNoJS(content: String ,fileName: String) {
     val fileName = "./src/main/resources/client.js"
     val myfile = File(fileName)
     var code = "function fun (){ \n         const console = {\n" +
@@ -27,33 +51,35 @@ fun writeNoJS(content: String) {
     myfile.writeText(code)
     val clientFileName = "./src/main/resources/styles/valueJS.js"
     val clientFile = File(clientFileName)
-    code = "editor.setValue("+"\""+((content).replace("\"","\\\"").replace("\n", "\\n\"+\n\"")+"\")")
+    code = "editor.setValue("+"\""+((code).replace("\"","\\\"").replace("\n", "\\n\"+\n\"")+"\")")
     clientFile.writeText(code)
-    clientFile.writeText(code)
-    println("Writed to NoJS")
+    println("Writed to NoJS $fileName")
 
 }
 
-fun writeHTML(content: String) {
-    val fileName = "./src/main/resources/client/client.html"
+fun writeHTML(content: String ,fileName: String) {
+    val fileName = if (fileName==="") { "./src/main/resources/client/client.html" }
+    else{ "./src/main/resources/client/$fileName" }
     val myfile = File(fileName)
     val clientFileName = "./src/main/resources/styles/valueHTML.js"
     val clientFile = File(clientFileName)
     val code = "editor.setValue("+"\""+((content).replace("\"","\\\"").replace("\n", "\\n\"+\n\"")+"\")")
     clientFile.writeText(code)
     myfile.writeText(content)
-    println("Writed to HTML")
+    println("Writed to HTML $fileName")
 }
 
-fun writeCSS(content: String) {
-    val fileName = "./src/main/resources/client/client.css"
+fun writeCSS(content: String ,fileName: String) {
+    val fileName = if (fileName==="") { "./src/main/resources/client/client.css" }
+    else{ "./src/main/resources/client/$fileName" }
+
     val myfile = File(fileName)
     val clientFileName = "./src/main/resources/styles/valueCSS.js"
     val clientFile = File(clientFileName)
     val code = "editor.setValue("+"\""+((content).replace("\"","\\\"").replace("\n", "\\n\"+\n\"")+"\")")
     clientFile.writeText(code)
     myfile.writeText(content)
-    println("Writed to CSS")
+    println("Writed to CSS $fileName")
 }
 fun getFiles(): MutableList<String> {
     val files: MutableList<String> =  mutableListOf()

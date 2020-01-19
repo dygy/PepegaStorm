@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Write Panel for HTML</title>
-    <link href="writePannel.css" rel="stylesheet">
+    <link href="/writePannel.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.35.0/codemirror.css">
     <link rel="stylesheet" href="https://codemirror.net/theme/darcula.css">
-    <link rel="stylesheet" href="./addon/hint/show-hint.css">
-    <script src="./lib/codemirror.js"></script>
-    <script src="./mode/css/css.js"></script>
-    <script src="./edit/closetag.js"></script>
+    <link rel="stylesheet" href="/addon/hint/show-hint.css">
+    <script src="/lib/codemirror.js"></script>
+    <script src="/mode/css/css.js"></script>
+    <script src="/edit/closetag.js"></script>
 
 </head>
 <body>
 <div id="navbar">
     <div id="config">
         <div class="pepegabar">
-            <img src="./pepega.png" onclick="spinner()"/>
+            <img src="/pepega.png" onclick="spinner()"/>
             <strong> PEPEGA Storm</strong>
         </div>
         <button id="run" onclick="toCompile()" >
@@ -24,10 +24,11 @@
         </button>
     </div>
 </div>
-<div id="lefbar">
-    <span> <a onclick="navigateTo('/html')"> client.html </a> </span>
-    <span> <a onclick="navigateTo('/js')"> client.js </a></span>
-    <span> <a onclick="navigateTo('/css')"> client.css </a></span>
+<div id="lefbar" oncontextmenu="createFileMenu()">
+    <div id="CFM">
+        <input id="fileName" type="text" placeholder="FILE NAME">
+        <button onclick="createFile()"> Create File</button>
+    </div>
 </div>
 <div  id="textArea">
     <textarea id='editor'>
@@ -52,8 +53,8 @@
     editor.save()
 
 </script>
-<script src="valueCSS.js"></script>
-<script src="css.js"></script>
-<script src="pepega.js"></script>
+<script src="/pepega.js"></script>
+<script src="/valueCSS.js"></script>
+<script src="/css.js"></script>
 </body>
 </html>

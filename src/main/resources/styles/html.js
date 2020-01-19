@@ -1,4 +1,4 @@
-const host = location.href.replace(/^http/, 'ws');
+const host = (location.origin+"/html/"+curFile).replace(/^http/, 'ws');
 const ws = new WebSocket(host);
 const output = document.querySelector('#terminal');
 

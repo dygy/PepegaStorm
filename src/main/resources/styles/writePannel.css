@@ -1,4 +1,28 @@
-
+#CFM{
+    display: none;
+    left: 30px;
+    padding: 30px;
+    position: absolute;
+    z-index: 20;
+    background-color: #2B2B2B;
+    color: whitesmoke;
+    box-shadow: 1px 1px 1px black;
+}
+#CFM ::placeholder{
+    color: white;
+}
+#CFM input{
+    border-radius: 3px;
+    color: white;
+    background-color: #5b5c63;
+}
+#CFM button{
+    border-radius: 3px;
+    float: right;
+    margin-top: 10px;
+    background-color: #5b5c63;
+    color: white;
+}
 .pepegabar{
     white-space: nowrap;
     display: flex;

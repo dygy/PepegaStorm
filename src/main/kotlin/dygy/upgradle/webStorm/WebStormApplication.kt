@@ -34,6 +34,20 @@ fun main() {
 		module = Application::main
 	).apply { start(wait = true) }
 }
+fun getFileRes(fileName: String ): String {
+	var fileRes="";
+	var start=false;
+	for ( y in fileName){
+		if (y=='.'){
+			start= true;
+		}
+		else if (start){
+			fileRes+=y
+		}
+	}
+	println(fileRes)
+	return  fileRes
+}
 fun Application.main() {
 	install(StatusPages) {
 		statusFile(HttpStatusCode.NotFound, HttpStatusCode.Unauthorized, filePattern = "./src/main/resources/error404.html")
@@ -53,20 +67,20 @@ fun Application.main() {
 		masking = false
 	}
 	routing {
-
-		webSocket("/js") {
+		webSocket("/js/{fileName}") {
 			for (frame in incoming){
 				when (frame) {
 					is Frame.Text -> {
 						val text = frame.readText()
-						//println(text.substring(0,4) == "HTML")
+						var x = call.parameters["fileName"]
+						x = x?.replace('^','.')
 						when {
-							text.substring(0,4)=="NoJS" -> {
-								writeNoJS(text.substring(4, text.length))
-								outgoing.send(Frame.Text(JSeval.goJS()))
-							}
 							text.substring(0, 2) == "JS" ->{
-								writeJS(text.substring(2, text.length))
+								writeJS(text.substring(2, text.length),x.orEmpty())
+							}
+							text.substring(0,4)=="NoJS" -> {
+								writeNoJS(text.substring(4, text.length),x.orEmpty())
+								outgoing.send(Frame.Text(JSeval.goJS()))
 							}
 						}
 						println(text)
@@ -74,24 +88,28 @@ fun Application.main() {
 				}
 			}
 		}
-		webSocket("/html") {
+		webSocket("/html/{fileName}") {
 			for (frame in incoming){
 				when (frame) {
 					is Frame.Text -> {
+						var x = call.parameters["fileName"]
+						x = x?.replace('^','.')
 						val text = frame.readText()
-						writeHTML(text)
+						writeHTML(text,x.orEmpty())
 						println(text)
 					}
 				}
 			}
 		}
-		webSocket("/css") {
+		webSocket("/css/{fileName}") {
 			for (frame in incoming){
 				when (frame) {
 					is Frame.Text -> {
+						var x = call.parameters["fileName"]
+						x = x?.replace('^','.')
 						val text = frame.readText()
 						//println(text.substring(0,4) == "HTML")
-						writeCSS(text)
+						writeCSS(text,x.orEmpty())
 						println(text)
 					}
 				}
@@ -102,18 +120,28 @@ fun Application.main() {
 			files("styles")
 			files("client")
 		}
+		get ("/create/{fileName}") {
+			val x = call.parameters["fileName"]
+			val fileRes = getFileRes(x.orEmpty())
+			if (x !== null) {
+				createDoc(x, fileRes)
+			}
+			call.respondFile(File("./src/main/resources/$fileRes.html"))
+		}
 		get ("/file/{fileName}") {
 			var x = call.parameters["fileName"]
 			x =x?.replace('^','.')
 			println(x)
 			//TODO: replace Value of .fileRes .js to file container and respond with .html file
-			call.respondText("LOL")
+			var fileRes = getFileRes(x.toString())
+			setDoc(x.orEmpty(),fileRes)
+			call.respondFile(File("./src/main/resources/$fileRes.html"))
 		}
 		get ("/files") {
 			call.respondText(getFiles().toString())
 		}
 		get ("/js") {
-			call.respondFile(File("./src/main/resources/js2.html"))
+			call.respondFile(File("./src/main/resources/js.html"))
 		}
 		get ("/css") {
 			call.respondFile(File("./src/main/resources/css.html"))
