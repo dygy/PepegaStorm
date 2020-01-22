@@ -4,5 +4,10 @@ function fun (){
                 warn: print,
                 error: print
         };
-console.log(3)
+let x = 0;
+for(x;x<100;x++){
+  document.body.innerHTML+=""+(x*x)/(x+x)
+  console.log((x*x)/(x+x))
+}
+
  } 

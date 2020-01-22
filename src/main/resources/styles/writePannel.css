@@ -81,6 +81,7 @@
 }
 
 #lefbar span{
+    z-index: 2;
     padding-left: 20px;
     display: block;
 }

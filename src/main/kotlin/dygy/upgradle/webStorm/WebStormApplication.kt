@@ -17,6 +17,7 @@ import io.ktor.response.respond
 import io.ktor.response.respondFile
 import io.ktor.response.respondText
 import io.ktor.routing.get
+import io.ktor.routing.post
 import io.ktor.routing.routing
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
@@ -119,6 +120,17 @@ fun Application.main() {
 			staticRootFolder = File("./src/main/resources")
 			files("styles")
 			files("client")
+		}
+		post("/delete/{fileName}") {
+			val x = call.parameters["fileName"]
+			val fileRes = getFileRes(x.orEmpty())
+			if (x !== null) {
+				deleteDoc(x, fileRes)
+				//call.respond(true)
+			}
+			else{
+				//call.respond(true)
+			}
 		}
 		get ("/create/{fileName}") {
 			val x = call.parameters["fileName"]

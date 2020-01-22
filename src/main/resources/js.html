@@ -23,7 +23,11 @@
         </button>
     </div>
 </div>
-<div id="lefbar" oncontextmenu="createFileMenu()">
+<div id="lefbar" >
+    <div id="CFM">
+        <input id="fileName" type="text" placeholder="FILE NAME">
+        <button onclick="createFile()"> Create File</button>
+    </div>
 </div>
 <div  id="textArea">
     <textarea id='editor'>

@@ -2,6 +2,22 @@ package dygy.upgradle.webStorm
 
 import java.io.File
 import java.io.FileReader
+import java.nio.file.Files
+import java.nio.file.Path
+import java.nio.file.Paths
+
+fun deleteDoc( fileName: String, fileRes: String){
+    val fileName = "./src/main/resources/client/$fileName"
+    val myfile = File(fileName).createNewFile()
+    val content = ""
+    val clientFileName = "./src/main/resources/styles/value${fileRes.toUpperCase()}.js"
+    val clientFile = File(clientFileName)
+    val code = "editor.setValue("+"\""+((content).replace("\"","\\\"").replace("\n", "\\n\"+\n\"")+"\")")
+
+    val bool =  Files.delete(Paths.get(fileName))
+    println("Delete $fileName")
+}
+
 fun createDoc( fileName: String, fileRes: String){
     val fileName = "./src/main/resources/client/$fileName"
     val myfile = File(fileName).createNewFile()
@@ -9,7 +25,6 @@ fun createDoc( fileName: String, fileRes: String){
     val clientFileName = "./src/main/resources/styles/value${fileRes.toUpperCase()}.js"
     val clientFile = File(clientFileName)
     val code = "editor.setValue("+"\""+((content).replace("\"","\\\"").replace("\n", "\\n\"+\n\"")+"\")")
-    clientFile.writeText(code)
     clientFile.writeText(code)
     println("Create $fileName")
 }

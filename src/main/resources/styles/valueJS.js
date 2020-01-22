@@ -1,1 +1,1 @@
-editor.setValue("console.log(3)")
+editor.setValue("")
