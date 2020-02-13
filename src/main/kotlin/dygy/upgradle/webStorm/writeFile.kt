@@ -20,13 +20,15 @@ fun deleteDoc( fileName: String, fileRes: String){
 
 fun createDoc( fileName: String, fileRes: String){
     val fileName = "./src/main/resources/client/$fileName"
-    val myfile = File(fileName).createNewFile()
-    val content = ""
-    val clientFileName = "./src/main/resources/styles/value${fileRes.toUpperCase()}.js"
-    val clientFile = File(clientFileName)
-    val code = "editor.setValue("+"\""+((content).replace("\"","\\\"").replace("\n", "\\n\"+\n\"")+"\")")
-    clientFile.writeText(code)
-    println("Create $fileName")
+    if (fileName.contains(".")) {
+        val myfile = File(fileName).createNewFile()
+        val content = ""
+        val clientFileName = "./src/main/resources/styles/value${fileRes.toUpperCase()}.js"
+        val clientFile = File(clientFileName)
+        val code = "editor.setValue(" + "\"" + ((content).replace("\"", "\\\"").replace("\n", "\\n\"+\n\"") + "\")")
+        clientFile.writeText(code)
+        println("Create $fileName")
+    }
 }
 fun setDoc(fileName :  String, fileRes:String){
     val fileName = "./src/main/resources/client/$fileName"

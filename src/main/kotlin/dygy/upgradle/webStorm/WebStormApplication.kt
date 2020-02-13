@@ -161,10 +161,25 @@ fun Application.main() {
 		get ("/html") {
 			call.respondFile(File("./src/main/resources/html.html"))
 		}
-		get("/run") {
-			call.respondFile(File("./src/main/resources/client/client.html"))
-		}
-		get("/") {
+        get ("/create/{fileName}") {
+            val x = call.parameters["fileName"]
+            val fileRes = getFileRes(x.orEmpty())
+            if (x !== null) {
+                createDoc(x, fileRes)
+            }
+            call.respondFile(File("./src/main/resources/$fileRes.html"))
+        }
+        get ("/run/{fileName}") {
+            val x = call.parameters["fileName"]
+            val fileRes = getFileRes(x.orEmpty())
+            if(fileRes=="html") {
+                call.respondFile(File("./src/main/resources/client/$x"))
+            }
+            else{
+                call.respondFile(File("./src/main/resources/client/client.html"))
+            }
+        }
+        get("/") {
 			call.respondFile(File("./src/main/resources/error404.html"))
 		}
 	}

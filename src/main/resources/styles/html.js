@@ -14,8 +14,10 @@ ws.onmessage = (msg) =>{
 let toCompile =() =>{
     console.log('about to send '+editor.getValue("\n"));
     ws.send(editor.getValue("\n"));
-    openInNewTab('/run')
+    console.log(curFile);
+    openInNewTab('/run/'+curFile)
 };
+
 let openInNewTab=(url)=>{
     const win = window.open(url, '_blank');
     win.focus();
