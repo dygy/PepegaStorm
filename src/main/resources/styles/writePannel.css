@@ -1,6 +1,9 @@
 html{
     overflow: hidden;
 }
+.CodeMirror {
+    overflow: auto!important;
+}
 #CFM{
     display: none;
     left: 30px;
@@ -90,6 +93,7 @@ html{
 /* width */
 ::-webkit-scrollbar {
     width: 10px;
+    height: 10px;
 }
 /* Track */
 ::-webkit-scrollbar-track {

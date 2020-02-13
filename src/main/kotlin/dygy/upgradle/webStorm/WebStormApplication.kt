@@ -15,6 +15,7 @@ import io.ktor.http.content.static
 import io.ktor.http.content.staticRootFolder
 import io.ktor.response.respond
 import io.ktor.response.respondFile
+import io.ktor.response.respondRedirect
 import io.ktor.response.respondText
 import io.ktor.routing.get
 import io.ktor.routing.post
@@ -33,7 +34,7 @@ fun main() {
 		watchPaths = listOf("./src/main"),
 		port = port,
 		module = Application::main
-	).apply { start(wait = true) }
+	).apply { start(true) }
 }
 fun getFileRes(fileName: String ): String {
 	var fileRes="";
@@ -144,10 +145,14 @@ fun Application.main() {
 			var x = call.parameters["fileName"]
 			x =x?.replace('^','.')
 			println(x)
-			//TODO: replace Value of .fileRes .js to file container and respond with .html file
 			var fileRes = getFileRes(x.toString())
-			setDoc(x.orEmpty(),fileRes)
-			call.respondFile(File("./src/main/resources/$fileRes.html"))
+			if (File("./src/main/resources/client/${x}").isFile) {
+				setDoc(x.orEmpty(),fileRes)
+				call.respondFile(File("./src/main/resources/$fileRes.html"))
+			}
+			else{
+				call.respondFile(File("./src/main/resources/error404.html"))
+			}
 		}
 		get ("/files") {
 			call.respondText(getFiles().toString())
