@@ -34,17 +34,20 @@ fun setDoc(fileName :  String, fileRes:String){
     val fileName = "./src/main/resources/client/$fileName"
     val myfile = File(fileName)
     val content = File(fileName).readText(Charsets.UTF_8)
+    if (fileRes!==""){
     val clientFileName = "./src/main/resources/styles/value${fileRes.toUpperCase()}.js"
     val clientFile = File(clientFileName)
     val code = "editor.setValue("+"\""+((content).replace("\"","\\\"").replace("\n", "\\n\"+\n\"")+"\")")
     clientFile.writeText(code)
     clientFile.writeText(code)
     println("Writed to $fileName")
+    }
 }
 
 fun writeJS(content: String ,fileName: String) {
-    val fileName = if (fileName==="") { "./src/main/resources/client/client.js" }
-    else{ "./src/main/resources/client/$fileName" }
+    val fileName =
+        if (fileName==="") { "./src/main/resources/client/client.js" }
+        else{ "./src/main/resources/client/$fileName"}
     val myfile = File(fileName)
     var code = content
     myfile.writeText(code)
@@ -54,7 +57,6 @@ fun writeJS(content: String ,fileName: String) {
     clientFile.writeText(code)
     myfile.writeText(content)
     println("Writed to JS $fileName")
-
 }
 
 fun writeNoJS(content: String ,fileName: String) {

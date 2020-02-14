@@ -7,8 +7,9 @@ html{
 #CFM{
     display: none;
     left: 30px;
+    bottom: 75vh;
     padding: 30px;
-    position: absolute;
+    position: fixed;
     z-index: 20;
     background-color: #2B2B2B;
     color: whitesmoke;
@@ -24,8 +25,6 @@ html{
 }
 #CFM button{
     border-radius: 3px;
-    float: right;
-    margin-top: 10px;
     background-color: #5b5c63;
     color: white;
 }
@@ -64,7 +63,7 @@ html{
     color: gainsboro;
     margin-top: 3px;
     width: 97%;
-    height: 80%;
+    height: 90%;
     overflow: auto;
     background-color: #2B2B2B;
     box-shadow: #2B2B2B 1px 1px 2px 3px;
@@ -129,16 +128,19 @@ html{
 #textArea{
     outline: none;
     position: absolute;
-    width: 86.5%;
-    height: 83%;
+    width: 83%;
+    height: 75%;
     background: #2B2B2B;
-    left: 13.5%;
+    left: 17%;
     top: 7.5%;
     bottom: 7.5%;
 }
 #textArea span{
     padding: 0;
     display: inline;
+}
+.CodeMirror-scroll{
+    margin-right: 0!important;
 }
 .CodeMirror{
     height: 100%!important;
@@ -158,7 +160,7 @@ body{
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 9%;
+    height: 17%;
     background: #3B3F42;
 
 }
@@ -168,9 +170,10 @@ body{
     left: 0;
     top: 7.5%;
     bottom: 7.5%;
-    height: 85%;
-    width: 13.5%;
+    height: 75%;
+    width: 17%;
     background: #3B3F42;
+    overflow-y: auto;
 }
 a{
     color: #fbfff9;

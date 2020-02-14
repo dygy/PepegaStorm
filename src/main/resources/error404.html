@@ -15,11 +15,27 @@
     </p>
     <ul id="nav">
         go to:
-        <li><a href="/js"> JS editor</a></li>
-        <li><a href="/css"> CSS editor </a></li>
-        <li><a href="/html"> HTML editor </a></li>
-    </ul>
 
+    </ul>
+    <script>
+        fetching()
+        async function fetching() {
+            await fetch("/files")
+                .then(response=>{
+                    return response.text()
+                })
+                .then(function (defs) {
+                    let ans= defs.replace(/\[/g,"").replace(/\]/g,"").replace(/,/g,"").split(" ")
+                    console.log(ans)
+                    for (let x=0;x<ans.length;x++){
+                        document.getElementById("nav").innerHTML+=`
+                            <li> <a href="/file/${ans[x].replace(".","%5E")}"> ${ans[x]}</a></li>
+                        `
+                    }
+                })
+                .catch()
+        }
+    </script>
 </div>
 </body>
 </html>

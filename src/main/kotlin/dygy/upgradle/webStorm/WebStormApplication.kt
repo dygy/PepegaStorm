@@ -3,10 +3,7 @@ package dygy.upgradle.webStorm
 import io.ktor.application.Application
 import io.ktor.application.call
 import io.ktor.application.install
-import io.ktor.features.CallLogging
-import io.ktor.features.DefaultHeaders
-import io.ktor.features.StatusPages
-import io.ktor.features.statusFile
+import io.ktor.features.*
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.cio.websocket.Frame
 import io.ktor.http.cio.websocket.readText
@@ -35,6 +32,15 @@ fun main() {
 		port = port,
 		module = Application::main
 	).apply { start(true) }
+}
+fun getFirstFile(fileRes: String): String{
+	var arr = getFiles()
+	for (el in arr){
+		if (getFileRes(el)===fileRes){
+			return el
+		}
+	}
+	return "!false."
 }
 fun getFileRes(fileName: String ): String {
 	var fileRes="";
@@ -78,7 +84,7 @@ fun Application.main() {
 						x = x?.replace('^','.')
 						when {
 							text.substring(0, 2) == "JS" ->{
-								writeJS(text.substring(2, text.length),x.orEmpty())
+								writeJS(text.substring(2, text.length),x.orEmpty()+"")
 							}
 							text.substring(0,4)=="NoJS" -> {
 								writeNoJS(text.substring(4, text.length),x.orEmpty())
@@ -156,15 +162,6 @@ fun Application.main() {
 		}
 		get ("/files") {
 			call.respondText(getFiles().toString())
-		}
-		get ("/js") {
-			call.respondFile(File("./src/main/resources/js.html"))
-		}
-		get ("/css") {
-			call.respondFile(File("./src/main/resources/css.html"))
-		}
-		get ("/html") {
-			call.respondFile(File("./src/main/resources/html.html"))
 		}
         get ("/create/{fileName}") {
             val x = call.parameters["fileName"]
