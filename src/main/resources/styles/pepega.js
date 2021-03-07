@@ -82,17 +82,17 @@ async function setFiles(str) {
     for (let x = 0; x < arr.length; x++) {
         arr[x] = arr[x].replace(" ", '');
         document.getElementById("lefbar").innerHTML +=
-            `<span style="padding-top: 5px;display: flex;flex-direction: row-reverse; justify-content: flex-end; align-items: center" id="file${x}" oncontextmenu="{document.getElementById('file'+${x}).remove();delFile('${arr[x]}')}" onclick="navigateTo('/file/${arr[x].replace('.', '^')}')">
+            `<span style="cursor: pointer; margin: 15px 5px;display: flex;flex-direction: row-reverse; justify-content: flex-end; align-items: center" id="file${x}" oncontextmenu="{document.getElementById('file'+${x}).remove();delFile('${arr[x]}')}" onclick="navigateTo('/file/${arr[x].replace('.', '^')}')">
                        <text>${arr[x]}</text> 
                             </span>`
         if (arr[x].includes("css")){
-            document.getElementById(`file${x}`).innerHTML+=`<img style="min-width: 19px;padding-left: 2px; height: 23px; margin-right: 3px " src="https://vignette.wikia.nocookie.net/wikies/images/a/a9/CSS3.png/revision/latest/scale-to-width-down/340?cb=20160909123652&path-prefix=ru"/>`
+            document.getElementById(`file${x}`).innerHTML+=`<img style="min-width: 22px; height: 23px; margin-right: 3px " src="https://kariselovuo.pro/ksprov1/wp-content/uploads/2018/02/css-logo-300x300.png"/>`
         }
         else if (arr[x].includes("html")){
-            document.getElementById(`file${x}`).innerHTML+=`<img style="min-width: 22px; height: 20px; margin-right: 3px " src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/HTML5_logo_and_wordmark.svg/1200px-HTML5_logo_and_wordmark.svg.png"/>`
+            document.getElementById(`file${x}`).innerHTML+=`<img style="min-width: 22px; height: 20px; margin-right: 3px " src="https://digibuc.com/cursos/wp-content/uploads/2020/05/cPp3gH7yKOtpZL1rVbHmaqp7RotYShReX4FzLeoN.png"/>`
         }
         else {
-            document.getElementById(`file${x}`).innerHTML+=`<img style="min-width: 22px; height: 20px; margin-right: 3px " src="https://dmitro.pro/wp-content/uploads/2018/03/js-logo.png"/>`
+            document.getElementById(`file${x}`).innerHTML+=`<img style="min-width: 22px; height: 20px; margin-right: 3px " src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Unofficial_JavaScript_logo_2.svg/480px-Unofficial_JavaScript_logo_2.svg.png"/>`
         }
         document.getElementById(`file${x}`).addEventListener('contextmenu', function(ev) {
             ev.preventDefault(); return false; }, false);

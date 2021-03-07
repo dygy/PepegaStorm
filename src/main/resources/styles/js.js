@@ -1,6 +1,6 @@
 const host = (location.origin+"/js/"+curFile).replace(/^http/, 'ws');
 const ws = new WebSocket(host);
-let output = document.querySelector('#terminal');
+let output = document.querySelector('#terminal-output');
 
 ws.onopen = () =>{
     console.log('websocket is connected ...');

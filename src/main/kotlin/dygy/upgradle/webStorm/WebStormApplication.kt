@@ -34,7 +34,7 @@ fun main() {
 	).apply { start(true) }
 }
 fun getFirstFile(fileRes: String): String{
-	var arr = getFiles()
+	val arr = getFiles()
 	for (el in arr){
 		if (getFileRes(el)===fileRes){
 			return el
